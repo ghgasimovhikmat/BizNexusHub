@@ -108,7 +108,6 @@ fun DashboardScreen(navController: NavHostController) {
     }
 }
 
-
 @Composable
 fun ProfileScreen(navController: NavHostController) {
     var name by remember { mutableStateOf("") }
@@ -143,20 +142,84 @@ fun ProfileScreen(navController: NavHostController) {
         ) {
             LogoHeader()
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Name") })
-            OutlinedTextField(value = bio, onValueChange = { bio = it }, label = { Text("Bio / Description") })
-            OutlinedTextField(value = skills, onValueChange = { skills = it }, label = { Text("Skills") })
-            OutlinedTextField(value = experience, onValueChange = { experience = it }, label = { Text("Experience Summary") })
+
+            // Name input
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Name", color = Color.White) },
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Description / Bio input
+            OutlinedTextField(
+                value = bio,
+                onValueChange = { bio = it },
+                label = { Text("Bio / Description", color = Color.White) },
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Skills input
+            OutlinedTextField(
+                value = skills,
+                onValueChange = { skills = it },
+                label = { Text("Skills", color = Color.White) },
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Experience input
+            OutlinedTextField(
+                value = experience,
+                onValueChange = { experience = it },
+                label = { Text("Experience Summary", color = Color.White) },
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
             Spacer(modifier = Modifier.height(16.dp))
+
             Button(onClick = { /* Save logic */ }, modifier = Modifier.fillMaxWidth()) {
                 Text("Save Profile")
             }
+            Spacer(modifier = Modifier.height(8.dp))
             Button(onClick = { navController.navigate("dashboard") }, modifier = Modifier.fillMaxWidth()) {
                 Text("Back to Dashboard")
             }
         }
     }
 }
+
 
 @Composable
 fun DiscoverScreen(navController: NavHostController) {
@@ -189,10 +252,27 @@ fun DiscoverScreen(navController: NavHostController) {
         ) {
             LogoHeader()
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(value = searchQuery, onValueChange = { searchQuery = it }, label = { Text("Search") }, modifier = Modifier.fillMaxWidth())
+
+            // Search input with white text
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                label = { Text("Search", color = Color.White) },
+                textStyle = LocalTextStyle.current.copy(color = Color.White),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.White,
+                    unfocusedBorderColor = Color.Gray,
+                    cursorColor = Color.White,
+                    focusedLabelColor = Color.White,
+                    unfocusedLabelColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
             Spacer(modifier = Modifier.height(8.dp))
             Text("Trending Tags: #AI, #Startup, #Mentor", color = Color.White)
             Spacer(modifier = Modifier.height(16.dp))
+
             Card(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                 Column(modifier = Modifier.padding(8.dp)) {
                     Text("Jane Doe - Startup Founder")
@@ -211,6 +291,7 @@ fun DiscoverScreen(navController: NavHostController) {
                     }
                 }
             }
+
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { navController.navigate("dashboard") }, modifier = Modifier.fillMaxWidth()) {
                 Text("Back to Dashboard")
@@ -218,6 +299,7 @@ fun DiscoverScreen(navController: NavHostController) {
         }
     }
 }
+
 
 
 @Composable
