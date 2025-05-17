@@ -36,24 +36,75 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun BizNexusApp() {
-    val navController = rememberNavController()
-    NavHost(navController, startDestination = "splash") {
-        composable("splash") { SplashScreen(navController) }
-        composable("login") { LoginScreen(navController) }
-        composable("signup") { SignUpScreen(navController) }
-        composable("home") { HomeScreen(navController) }
-        composable("features") { FeaturesScreen(navController) }
-        composable("post") { PostCollaborationScreen(navController) }
-        composable("contact") { ContactScreen(navController) }
-        composable("about") { AboutScreen(navController) }
-        composable("dashboard") { DashboardScreen(navController) }
-        composable("profile") { ProfileScreen(navController) }
-        composable("discover") { DiscoverScreen(navController) }
-    }
-}
 
+    @Composable
+    fun BizNexusApp() {
+        val navController = rememberNavController()
+        NavHost(navController, startDestination = "splash") {
+            composable("splash") { SplashScreen(navController) }
+            composable("login") { LoginScreen(navController) }
+            composable("signup") { SignUpScreen(navController) }
+            composable("home") { HomeScreen(navController) }
+            composable("features") { FeaturesScreen(navController) }
+            composable("post") { PostCollaborationScreen(navController) }
+            composable("contact") { ContactScreen(navController) }
+            composable("about") { AboutScreen(navController) }
+            composable("dashboard") { DashboardScreen(navController) }
+            composable("profile") { ProfileScreen(navController) }
+            composable("discover") { DiscoverScreen(navController) }
+            composable("limited_offers") { LimitedOffersScreen(navController) }
+            composable("special_offers") { SpecialOffersScreen(navController) }
+            composable("offer_pro_starter") {
+                OfferDetailScreen(
+                    navController,
+                    "Pro Starter Boost",
+                    "Boost your journey with AI-driven networking, beta feature access, and a verified badge for credibility. Get discovered faster, connect easier, and start strong. Perfect for new freelancers and early-stage startups. Includes onboarding webinars and 24/7 support during your first month."
+                )
+            }
+            composable("offer_collab_spotlight") {
+                OfferDetailScreen(
+                    navController,
+                    "Collaboration Spotlight",
+                    "Get your collaboration post featured on the homepage and top feeds. This offer guarantees maximum visibility to investors, freelancers, and startups. Includes 3-day analytics, engagement tracking, and profile boost. Limited slots per week."
+                )
+            }
+            composable("offer_local_champion") {
+                OfferDetailScreen(
+                    navController,
+                    "Local Champion Badge",
+                    "Showcase your leadership in your city. This badge places your profile at the top of regional searches, helps build local trust, and includes an invite to exclusive local networking events and newsletters. Great for community builders."
+                )
+            }
+            composable("offer_premium") {
+                OfferDetailScreen(
+                    navController,
+                    "BizNexus Premium",
+                    "Unlock the full potential of BizNexus Hub with Premium. Enjoy an ad-free interface, unlimited messaging, access to premium-only networking events, smart project matches, and advanced analytics. Designed for professionals who want serious growth."
+                )
+            }
+            composable("offer_premium_2") {
+                OfferDetailScreen(
+                    navController,
+                    "Premium 2.0",
+                    "All the benefits of Premium, plus AI collaboration advisors, team-based project dashboards, smart deadline milestones, and an intelligent notification engine. This is the future of professional networking productivity."
+                )
+            }
+            composable("offer_freelancer") {
+                OfferDetailScreen(
+                    navController,
+                    "Freelancer Accelerator",
+                    "Enhance your credibility with profile verification, client testimonials, and prioritized exposure to project owners. Includes 1-on-1 mentorship, skill badge assessments, and weekly feature slots. Tailored for solo professionals."
+                )
+            }
+            composable("offer_startup") {
+                OfferDetailScreen(
+                    navController,
+                    "Startup Visibility Pack",
+                    "Stand out in a competitive market. Your startup profile gets homepage placement, top results in industry searches, and access to growth analytics tools. Also includes press release templates and promo visuals for your brand."
+                )
+            }
+        }
+    }
 
 @Composable
 fun DashboardScreen(navController: NavHostController) {
@@ -364,7 +415,6 @@ fun LoginScreen(navController: NavHostController) {
         Text("Don't have an account? Sign up", modifier = Modifier.clickable { navController.navigate("signup") }, color = Color.Blue)
     }
 }
-
 @Composable
 fun SignUpScreen(navController: NavHostController) {
     val context = LocalContext.current
@@ -372,38 +422,149 @@ fun SignUpScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var role by remember { mutableStateOf("") }
-    var showSuccess by remember { mutableStateOf(false) }
 
     Column(
         Modifier
             .fillMaxSize()
             .background(Color.Black)
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LogoHeader()
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         Text("Sign Up", fontSize = 24.sp, color = Color.White)
         Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Full Name") },
-            modifier = Modifier.fillMaxWidth(), textStyle = LocalTextStyle.current.copy(color = Color.White))
-        OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth(), textStyle = LocalTextStyle.current.copy(color = Color.White))
-        OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(), textStyle = LocalTextStyle.current.copy(color = Color.White))
-        OutlinedTextField(value = role, onValueChange = { role = it }, label = { Text("Role (Freelancer/Startup/SME)") },
-            modifier = Modifier.fillMaxWidth(), textStyle = LocalTextStyle.current.copy(color = Color.White))
+        OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Full Name") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Password") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = role, onValueChange = { role = it }, label = { Text("Role") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
-            showSuccess = true
-            navController.navigate("home")
-        }, colors = ButtonDefaults.buttonColors(containerColor = Color.Blue), modifier = Modifier.fillMaxWidth()) {
-            Text("Create Account", color = Color.White, fontWeight = FontWeight.Bold)
+        Button(onClick = { Toast.makeText(context, "Registered!", Toast.LENGTH_SHORT).show() }, modifier = Modifier.fillMaxWidth()) {
+            Text("Register")
         }
-        if (showSuccess) {
-            Toast.makeText(context, "Account created successfully!", Toast.LENGTH_SHORT).show()
+        Spacer(modifier = Modifier.height(32.dp))
+        Text("\uD83C\uDF1F Limited Time Offers", color = Color.Yellow, modifier = Modifier.clickable {
+            navController.navigate("limited_offers")
+        })
+        Spacer(modifier = Modifier.height(8.dp))
+        Text("\uD83D\uDD25 Special Offers", color = Color.Yellow, modifier = Modifier.clickable {
+            navController.navigate("special_offers")
+        })
+    }
+}
+
+@Composable
+fun LimitedOffersScreen(navController: NavHostController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("Limited Time Offers", color = Color.White) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(painter = painterResource(id = android.R.drawable.ic_media_previous), contentDescription = null, tint = Color.White)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black))
+        },
+        containerColor = Color.Black
+    ) { padding ->
+        Column(modifier = Modifier.padding(padding).padding(16.dp)) {
+            OfferItem("Pro Starter Boost", "Free 30-day AI networking", onClick = {
+                navController.navigate("offer_pro_starter")
+            })
+            OfferItem("Collaboration Spotlight", "Feature your projects on top", onClick = {
+                navController.navigate("offer_collab_spotlight")
+            })
+            OfferItem("Local Champion Badge", "Be seen in your local community", onClick = {
+                navController.navigate("offer_local_champion")
+            })
+        }
+    }
+}
+
+@Composable
+fun SpecialOffersScreen(navController: NavHostController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("Special Offers", color = Color.White) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(painter = painterResource(id = android.R.drawable.ic_media_previous), contentDescription = null, tint = Color.White)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black))
+        },
+        containerColor = Color.Black
+    ) { padding ->
+        Column(modifier = Modifier.padding(padding).padding(16.dp)) {
+            OfferItem("BizNexus Premium", "Ad-free, premium events", onClick = {
+                navController.navigate("offer_premium")
+            })
+            OfferItem("Premium 2.0", "AI tools, team workspace", onClick = {
+                navController.navigate("offer_premium_2")
+            })
+            OfferItem("Freelancer Accelerator", "Boost for freelancers", onClick = {
+                navController.navigate("offer_freelancer")
+            })
+            OfferItem("Startup Visibility Pack", "Top homepage placement", onClick = {
+                navController.navigate("offer_startup")
+            })
+        }
+    }
+}
+
+@Composable
+fun OfferItem(title: String, description: String, onClick: () -> Unit) {
+    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp).clickable(onClick = onClick)) {
+        Text(text = title, fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color.White)
+        Text(text = description, fontSize = 14.sp, color = Color.Gray)
+    }
+}
+
+@Composable
+fun OfferDetailScreen(navController: NavHostController, title: String, description: String) {
+    val context = LocalContext.current
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(title, color = Color.White) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.ic_media_previous),
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black)
+            )
+        },
+        containerColor = Color.Black
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = title, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color.White)
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = description, color = Color.White, fontSize = 16.sp, lineHeight = 24.sp)
+            Spacer(modifier = Modifier.height(32.dp))
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(onClick = { navController.popBackStack() }) {
+                    Text("Back")
+                }
+                Button(onClick = {
+                    Toast.makeText(context, "Purchase Success!", Toast.LENGTH_SHORT).show()
+                }) {
+                    Text("Purchase")
+                }
+            }
         }
     }
 }
