@@ -155,6 +155,18 @@ fun DashboardScreen(navController: NavHostController) {
             Button(onClick = { navController.navigate("post") }, modifier = Modifier.fillMaxWidth()) {
                 Text("New Collaboration")
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = {
+                    navController.navigate("login") {
+                        popUpTo("dashboard") { inclusive = true } // Clear backstack
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Log Out", color = Color.White)
+            }
         }
     }
 }
